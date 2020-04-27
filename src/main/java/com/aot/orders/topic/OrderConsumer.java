@@ -21,15 +21,14 @@ public class OrderConsumer {
     private static Consumer<Long, String> createConsumer() {
         final Properties settings = new Properties();
         settings.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVER);
-        settings.put(ConsumerConfig.GROUP_ID_CONFIG, "OrderConsumerGroup");
+        settings.put(ConsumerConfig.GROUP_ID_CONFIG, "OrderConsumerExample");
         settings.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class.getName());
         settings.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        settings.put(ConsumerConfig.GROUP_ID_CONFIG, "OrderConsumer");
-        settings.put(ConsumerConfig.CLIENT_ID_CONFIG, "com.aot.orders.topic.OrderStatusProducer");
-        settings.put("enable.auto.commit", false);
+        settings.put("enable.auto.commit", true);
         settings.put("session.timeout.ms", 30000);
         settings.put("heartbeat.interval.ms", 10000);
         settings.put("request.timeout.ms", 31000);
+        settings.put("enable.partition.eof", "false");
         /*settings.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
         settings.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "C:\\codes\\programs\\Kafka\\ssl\\client.truststore.jks");
         settings.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "test1234");
@@ -64,7 +63,7 @@ public class OrderConsumer {
                         record.partition(), record.offset());
             });
 
-            consumer.commitSync();
+            consumer.commitAsync();
         }
         consumer.close();
         System.out.println("DONE");
