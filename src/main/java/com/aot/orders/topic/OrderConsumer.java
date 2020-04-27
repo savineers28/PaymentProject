@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public class OrderConsumer {
     private final static String TOPIC = "OrderTopic";
-    private final static String BOOTSTRAP_SERVER = "kafka:9092";
+    private final static String BOOTSTRAP_SERVER = "localhost:9092";
 
     public static void main(String... args) throws Exception {
         runConsumer();
@@ -49,7 +49,7 @@ public class OrderConsumer {
 
         while (true) {
             final ConsumerRecords<Long, String> consumerRecords =
-                    consumer.poll(1000);
+                    consumer.poll(10000);
 
             if (consumerRecords.count()==0) {
                 noRecordsCount++;
