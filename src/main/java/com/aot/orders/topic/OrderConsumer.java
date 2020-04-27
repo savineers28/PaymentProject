@@ -64,7 +64,7 @@ public class OrderConsumer {
                         record.partition(), record.offset());
             });
 
-            consumer.commitAsync();
+            consumer.commitSync();
         }
         consumer.close();
         System.out.println("DONE");
