@@ -26,6 +26,10 @@ public class OrderConsumer {
         settings.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         settings.put(ConsumerConfig.GROUP_ID_CONFIG, "OrderConsumer");
         settings.put(ConsumerConfig.CLIENT_ID_CONFIG, "com.aot.orders.topic.OrderStatusProducer");
+        settings.put("enable.auto.commit", false);
+        settings.put("session.timeout.ms", 30000);
+        settings.put("heartbeat.interval.ms", 10000);
+        settings.put("request.timeout.ms", 31000);
         /*settings.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
         settings.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "C:\\codes\\programs\\Kafka\\ssl\\client.truststore.jks");
         settings.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "test1234");
