@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public class OrderConsumer {
     private final static String TOPIC = "OrderTopic";
-    private final static String BOOTSTRAP_SERVER = "localhost:9092";
+    private final static String BOOTSTRAP_SERVER = "kafka:9092";
 
     public static void main(String... args) throws Exception {
         runConsumer();
@@ -51,20 +51,22 @@ public class OrderConsumer {
         while (true) {
             final ConsumerRecords<Long, String> consumerRecords =
                     consumer.poll(500);
-
+            System.out.print("Inside RunConsumer");
             if (consumerRecords.count()==0) {
                 noRecordsCount++;
+                System.out.print("Inside RunConsumer - noRecordsCount" + noRecordsCount);
                 if (noRecordsCount > giveUp) break;
                 else continue;
             }
-
+            System.out.print("Inside RunConsumer1" + consumerRecords.count());
             consumerRecords.forEach(record -> {
                 System.out.printf("Consumer Record:(%d, %s, %d, %d)\n",
                         record.key(), record.value(),
                         record.partition(), record.offset());
             });
-
+            System.out.print("Inside RunConsumer2");
             consumer.commitAsync();
+            System.out.print("Inside RunConsumer3");
         }
         consumer.close();
         System.out.println("DONE");
