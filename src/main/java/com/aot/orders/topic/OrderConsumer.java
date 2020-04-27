@@ -24,11 +24,12 @@ public class OrderConsumer {
         settings.put(ConsumerConfig.GROUP_ID_CONFIG, "OrderConsumerExample");
         settings.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class.getName());
         settings.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        settings.put("enable.auto.commit", true);
+        settings.put("enable.auto.commit", false);
         settings.put("session.timeout.ms", 30000);
         settings.put("heartbeat.interval.ms", 10000);
         settings.put("request.timeout.ms", 31000);
         settings.put("enable.partition.eof", "false");
+        settings.put("auto.offset.reset","earliest");
         /*settings.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
         settings.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "C:\\codes\\programs\\Kafka\\ssl\\client.truststore.jks");
         settings.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "test1234");
@@ -49,7 +50,7 @@ public class OrderConsumer {
 
         while (true) {
             final ConsumerRecords<Long, String> consumerRecords =
-                    consumer.poll(10000);
+                    consumer.poll(500);
 
             if (consumerRecords.count()==0) {
                 noRecordsCount++;
