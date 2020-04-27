@@ -25,6 +25,7 @@ public class OrderConsumer {
         settings.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class.getName());
         settings.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         settings.put(ConsumerConfig.GROUP_ID_CONFIG, "OrderConsumer");
+        settings.put(ConsumerConfig.CLIENT_ID_CONFIG, "com.aot.orders.topic.OrderStatusProducer");
         /*settings.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
         settings.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "C:\\codes\\programs\\Kafka\\ssl\\client.truststore.jks");
         settings.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "test1234");
