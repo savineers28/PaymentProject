@@ -33,7 +33,7 @@ public class OrderConsumer {
         settings.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "test1234");
         settings.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, "test1234");*/
         // Create the consumer using props.
-        final Consumer<Long, String> consumer = new KafkaConsumer<>(settings);
+        final Consumer<Long, String> consumer = new KafkaConsumer<Long, String>(settings);
         // Subscribe to the topic.
         consumer.subscribe(Collections.singletonList(TOPIC));
         return consumer;
